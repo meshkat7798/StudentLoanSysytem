@@ -13,7 +13,7 @@ public interface BaseEntityService<T extends BaseEntity<ID>, ID extends Serializ
 
     void delete(ID id);
 
-    Optional<T> findById(ID id);
+    T findById(ID id);
 
     Collection<T> findAll();
 

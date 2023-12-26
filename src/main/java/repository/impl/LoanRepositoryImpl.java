@@ -55,7 +55,7 @@ public  class LoanRepositoryImpl extends BaseEntityRepositoryImpl<Loan, Integer>
         try {
             return entityManager.createQuery("""
                             SELECT l FROM Loan l WHERE l.student = :student
-                            """,Loan.class)
+                            """, Loan.class)
                     .setParameter("student", student)
                     .getResultList();
         } catch (Exception e) {
@@ -109,6 +109,21 @@ public  class LoanRepositoryImpl extends BaseEntityRepositoryImpl<Loan, Integer>
                             """, Loan.class)
                     .setParameter("loanType", LoanType.MORTGAGE)
                     .setParameter("student", student)
+                    .getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Loan findLoanById(int id) {
+        try {
+            return entityManager.createQuery("""
+                            FROM Loan l1
+                            WHERE l1.id = :id
+                            """, Loan.class)
+                    .setParameter("id", id)
                     .getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();

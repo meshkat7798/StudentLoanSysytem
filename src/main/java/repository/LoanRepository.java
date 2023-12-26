@@ -20,4 +20,5 @@ public interface LoanRepository extends BaseEntityRepository<Loan, Integer> {
     Loan findTuitionLoan(Student student);
 
     Loan findMortgageLoan(Student student);
+    Loan findLoanById(int id);
 }

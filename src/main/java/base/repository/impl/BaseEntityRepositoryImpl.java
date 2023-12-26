@@ -76,8 +76,8 @@ public abstract class BaseEntityRepositoryImpl<T extends BaseEntity<ID>, ID exte
     }
 
     @Override
-    public Optional<T> findById(ID id) {
-        return Optional.ofNullable(entityManager.find(getEntityClass(), id));
+    public T findById(ID id) {
+        return entityManager.find(getEntityClass(), id);
     }
 
     @Override

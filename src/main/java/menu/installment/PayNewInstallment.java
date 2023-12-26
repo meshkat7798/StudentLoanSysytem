@@ -16,21 +16,8 @@ public class PayNewInstallment {
     Student student = SecurityContext.getCurrentStudent();
 
     public void repayment() {
-        List<Loan> loans = loanService.findByStudent(student);
-        List<Integer> loanIds = new ArrayList<>();
-        for (Loan loan : loans) {
-            int loanId = loan.getId();
-            loanIds.add(loanId);
-
-        }
-        loans.forEach(System.out::println);
-        Integer loanId = InputHandling.integerInput();
-        while (!loanIds.contains(loanId)) {
-            System.out.println("Please Choose A Valid Id: ");
-            loanId = InputHandling.integerInput();
-
-        }
-        Loan loan = loanService.findById(loanId).orElse(null);
+       int loanId = LoanPayBackMenu.showStudentLoans(student);
+        Loan loan = loanService.findLoanById(loanId);
         SecurityContext.fillLoanContext(loan);
         List<Installment> installments = Regesteration.fillInstallment(loan);
         List<Integer> numbers = new ArrayList<>();
@@ -51,9 +38,12 @@ public class PayNewInstallment {
         CreditCard creditCard = Regesteration.setCardInfo();
         if (creditCardService.isSameCard(student.getId(), creditCard.getCardNumber())) {
             installment.setIspaid(true);
+            installment.setPaymentDueDate(SecurityContext.getTodayDate());
             installment.setId(installment.getId());
             installmentService.creatOrUpdate(installment);
             System.out.println(" SUCCESSFULLY REPAID :) ");
+            System.out.println();
+            System.out.println();
         } else {
             System.out.println("The Card Does Not Match");
 

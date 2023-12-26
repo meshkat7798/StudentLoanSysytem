@@ -2,8 +2,6 @@ package service;
 
 import base.service.BaseEntityService;
 import entity.Installment;
-import entity.Loan;
-import entity.person.Student;
 import java.util.List;
 
 @SuppressWarnings("unused")

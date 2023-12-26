@@ -1,10 +1,14 @@
 package menu.installment;
+import entity.Loan;
 import entity.person.Student;
 import menu.loan.LoanMenu;
 import utility.InputHandling;
 import utility.SecurityContext;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import static menu.MainMenu.*;
 public class LoanPayBackMenu {
 
@@ -34,6 +38,30 @@ public class LoanPayBackMenu {
                         "You Have Not Graduated Yet!");
                 LoanMenu.backToStudent();
             }
+        }
+
+        public static int showStudentLoans(Student student){
+            List<Loan> loans = loanService.findByStudent(student);
+            List<Integer> loanIds = new ArrayList<>();
+            for (Loan loan : loans) {
+                int loanId = loan.getId();
+                loanIds.add(loanId);
+
+            }
+            for (Loan loan:loans) {
+                System.out.println();
+                System.out.print(loan.getId()+ " ");
+                System.out.print(loan);
+            }
+            System.out.println();
+            System.out.println("Please Choose LoanId:");
+            Integer loanId = InputHandling.integerInput();
+            while (!loanIds.contains(loanId)) {
+                System.out.println("Please Choose A Valid Id: ");
+                loanId = InputHandling.integerInput();
+
+            }
+            return loanId;
         }
     }
 

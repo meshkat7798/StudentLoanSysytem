@@ -2,13 +2,10 @@ package repository.impl;
 
 import base.repository.impl.BaseEntityRepositoryImpl;
 import entity.Installment;
-import entity.Loan;
-import entity.person.Student;
 import repository.InstallmentRepository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -33,7 +30,8 @@ public class InstallmentRepositoryImpl extends BaseEntityRepositoryImpl<Installm
                     .getResultList();
             for (Object[] result : results) {
                 int numberOfInstallment = (int) result[0];
-                Date dueDate = (Date) result[1];
+                int installmentLoanId = (int) result[1];
+                LocalDate dueDate = (LocalDate) result[2];
             }
             return results;
         } catch (Exception e) {
@@ -52,8 +50,10 @@ public class InstallmentRepositoryImpl extends BaseEntityRepositoryImpl<Installm
                     .getResultList();
 
             for (Object[] result : results) {
-                int loanNumber = (int) result[0];
-                Date dueDate = (Date) result[1];
+                int numberOfInstallment = (int) result[0];
+                int installmentLoanId = (int) result[1];
+                LocalDate dueDate = (LocalDate) result[2];
+                double installmentAmount = (double) result[3];
             }
             return results;
         } catch (Exception e) {

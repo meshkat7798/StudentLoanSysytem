@@ -49,14 +49,14 @@ public class InputHandling {
         int year = InputHandling.integerInput();
         while (year > 2023 || year < 1900) {
             System.out.println("Please Enter A Year Between 1900 and 2023!");
-            System.out.println("BirthYear:");
+            System.out.println("Year:");
             year = InputHandling.integerInput();
         }
         System.out.println("Month:");
         int month = InputHandling.integerInput();
         while (month > 12 || month < 1) {
             System.out.println("Please Enter A Month Between 1 and 12!");
-            System.out.println("BirthMonth:");
+            System.out.println("Month:");
             month = InputHandling.integerInput();
         }
         String strMonth = String.valueOf(month);
@@ -68,19 +68,19 @@ public class InputHandling {
         if (month == 2) {
             while (day > 28 || day < 1) {
                 System.out.println("Please Enter A Day Between 1 and 28!");
-                System.out.println("BirthDay:");
+                System.out.println("Day:");
                 day = InputHandling.integerInput();
             }
         }else if (month == 11 || month==4 || month==6 || month==9) {
             while (day > 30 || day < 1) {
                 System.out.println("Please Enter A Day Between 1 and 30!");
-                System.out.println("BirthDay:");
+                System.out.println("Day:");
                 day = InputHandling.integerInput();
             }
         }else {
             while (day > 31 || day < 1) {
                 System.out.println("Please Enter A Day Between 1 and 31!");
-                System.out.println("BirthDay:");
+                System.out.println("Day:");
                 day = InputHandling.integerInput();
             }
         }String strDay = String.valueOf(day);

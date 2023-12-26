@@ -7,7 +7,6 @@ import entity.person.Student;
 import repository.LoanRepository;
 import service.LoanService;
 import service.StudentService;
-import utility.ApplicationContext;
 import utility.SecurityContext;
 
 import java.util.List;
@@ -109,5 +108,10 @@ public class LoanServiceImpl extends BaseEntityServiceImpl<Loan, Integer, LoanRe
     @Override
     public Loan findMortgageLoan(Student student) {
         return repository.findMortgageLoan(student);
+    }
+
+    @Override
+    public Loan findLoanById(int id) {
+        return repository.findLoanById(id);
     }
 }

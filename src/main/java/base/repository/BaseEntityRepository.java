@@ -15,7 +15,7 @@ public interface BaseEntityRepository<T,ID extends Serializable> {
 
     void delete(ID id);
 
-    Optional<T> findById(ID id);
+    T findById(ID id);
 
     Collection<T> findAll();
 

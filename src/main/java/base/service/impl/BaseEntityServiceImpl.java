@@ -28,7 +28,7 @@ public class BaseEntityServiceImpl<T extends BaseEntity<ID>, ID extends Serializ
     }
 
     @Override
-    public Optional<T> findById(ID id) {
+    public T findById(ID id) {
         return repository.findById(id);
     }
 
