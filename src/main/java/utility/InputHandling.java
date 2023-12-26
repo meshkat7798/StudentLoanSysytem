@@ -25,6 +25,15 @@ public class InputHandling {
                 return scanner.next();
     }
 
+    public static String nameInput() {
+        String name = scanner.next();
+        while (!Validation.isValidName(name)){
+            System.out.println("Please Enter Valid Name(only alphabet)");
+            name = scanner.next();
+        }
+    return name;
+    }
+
     public static boolean booleanInput() {
         int bool = scanner.nextInt();
             scanner.nextLine();
@@ -96,5 +105,6 @@ public class InputHandling {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
            return LocalDate.parse(string, formatter);
     }
+
 
     }

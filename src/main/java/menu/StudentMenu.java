@@ -3,7 +3,6 @@ package menu;
 import entity.person.Spouse;
 import entity.person.Student;
 import menu.installment.LoanPayBackMenu;
-import menu.loan.LoanMenu;
 import utility.InputHandling;
 import utility.SecurityContext;
 
@@ -52,23 +51,20 @@ public class StudentMenu {
             System.out.println("Please choose from above:");
             int input = InputHandling.switchInput(1, 6);
             switch (input) {
-                case 1:
-                    new LoanMenu().chooseLoan();
-                    break;
-
-                case 2: LoanPayBackMenu.installmentMenu();
-                    break;
-                case 3: {
+                case 1 -> {
+                    LoanMenu loanMenu = new LoanMenu();
+                    loanMenu.chooseLoan();
+                }
+                case 2 -> LoanPayBackMenu.installmentMenu();
+                case 3 -> {
                     Student edited = Updating.changeUserAndPass(student);
                     MainMenu.studentService.creatOrUpdate(edited);
-                    break;
                 }
-                case 4: {
+                case 4 -> {
                     Student edited = Updating.changeGrade(student);
                     MainMenu.studentService.creatOrUpdate(edited);
-                    break;
                 }
-                case 5: {
+                case 5 -> {
                     Student edited = Updating.changeMarriageStatus(student);
                     if (edited.isMarried() && !student.isMarried()) {
                         Spouse spouse = Regesteration.setSpouseInfo();
@@ -81,15 +77,13 @@ public class StudentMenu {
                     }
 
                     MainMenu.studentService.creatOrUpdate(edited);
-                    break;
                 }
-                case 6: {
+                case 6 -> {
 
                     System.out.println("Goodbye, " + student.getFirstname() + "!");
                     SecurityContext.logout();
                     menu.start();
                     stillSignedIn = false;
-                    break;
                 }
             }
         }

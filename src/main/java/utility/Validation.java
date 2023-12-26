@@ -23,6 +23,12 @@ public class Validation {
         return phoneNumber.matches(pattern.pattern());
     }
 
+    public static boolean isValidName(String name) {
+        Pattern pattern =
+                Pattern.compile("^[a-zA-Z ]{2,30}$");
+        return name.matches(pattern.pattern());
+    }
+
     public static boolean isValid10DigitNumber(String nationalityCode) {
         Pattern pattern =
                 Pattern.compile("^\\d{10}$");
@@ -40,7 +46,7 @@ public class Validation {
 
     public static int validEntryYear() {
         int year = InputHandling.integerInput();
-        while (year > 2024) {
+        while (year > 2024||year<2000) {
             System.out.println("Please Enter A Proper Entry Year Before 2025!");
             System.out.println("EntryYear:");
             year = InputHandling.integerInput();

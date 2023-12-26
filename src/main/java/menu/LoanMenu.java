@@ -1,15 +1,14 @@
-package menu.loan;
+package menu;
 
 import entity.CreditCard;
 import entity.Installment;
 import entity.Loan;
+import entity.enumeration.LoanType;
+import entity.enumeration.PaymentType;
 import entity.enumeration.UnversityType;
 import entity.person.Student;
-import menu.MainMenu;
 import menu.Regesteration;
 import menu.StudentMenu;
-import service.*;
-import utility.ApplicationContext;
 import utility.InputHandling;
 import utility.SecurityContext;
 import utility.Validation;
@@ -39,7 +38,7 @@ public class LoanMenu {
                 switch (input) {
                     case 1 -> {
                         if (!loanService.studentHasActiveEducationalLoan(student)) {
-                            Loan education = EducationMenu.setEducationLoan(student);
+                            Loan education =setEducationLoan(student);
                             education.setStudentGrade(student.getStudentGrade());
                             education.setUnversityType(student.getUnversityType());
                             loanService.creatOrUpdate(education);
@@ -63,7 +62,7 @@ public class LoanMenu {
                     case 2 -> {
                         if(student.getUnversityType()!= UnversityType.PUBLIC_DAILY){
                         if (!loanService.studentHasActiveTuitionLoan(student)) {
-                            Loan tuition = TuitionMenu.setTuitionLoan(student);
+                            Loan tuition = setTuitionLoan(student);
                             tuition.setStudentGrade(student.getStudentGrade());
                             tuition.setUnversityType(student.getUnversityType());
                             loanService.creatOrUpdate(tuition);
@@ -91,7 +90,7 @@ public class LoanMenu {
                         if (student.isMarried()) {
                             if (!student.isHasDormitory()) {
                                 if (loanService.studentHasNotActiveMortgageLoan(student,studentService)) {
-                                    Loan mortgage = MortgageMenu.setMortgageLoan(student);
+                                    Loan mortgage = setMortgageLoan(student);
                                     mortgage.setStudentGrade(student.getStudentGrade());
                                     mortgage.setUnversityType(student.getUnversityType());
                                     mortgage.setCity(student.getAddress().getCity());
@@ -138,6 +137,47 @@ public class LoanMenu {
         Student student = SecurityContext.getCurrentStudent();
         LocalDate date = SecurityContext.getTodayDate();
         new StudentMenu(student.getUsername(), student.getPassword(), date.toString()).studentMenu(student);
+    }
+
+    public Loan setEducationLoan(Student student){
+        LocalDate creationDate = SecurityContext.getTodayDate();
+        double amount = 0;
+        switch (student.getStudentGrade()) {
+            case BACHELOR, ASSOCIATE, BACHELOR_DISCONTINUOUS -> amount =1900000;
+            case MASTER, MASTER_DISCONTINUOUS, PHD_CONTINUOUS, PHD_PROFESSIONAL -> amount=2250000;
+            case SPECIALIZED_DOCTORATE ->  amount = 2600000;
+        }
+        LoanType loanType = LoanType.EDUCATION;
+        PaymentType paymentType = PaymentType.ONCE_IN_EACH_TERM;
+        return new Loan(amount,student,loanType,paymentType,creationDate);
+    }
+
+    public Loan setMortgageLoan(Student student) {
+        LocalDate creationDate = SecurityContext.getTodayDate();
+        double amount;
+        if (addressService.isCapital(student.getAddress().getCity())) {
+            amount = 32000000;
+        } else if (addressService.isMetropolis(student.getAddress().getCity())) {
+            amount = 26000000;
+        } else {
+            amount = 19500000;
+        }
+        LoanType loanType = LoanType.MORTGAGE;
+        PaymentType paymentType = PaymentType.ONCE_IN_EACH_ACADEMIC_LEVEL;
+        return new Loan(amount, student, loanType, paymentType, creationDate);
+    }
+
+    public Loan setTuitionLoan(Student student){
+        LocalDate creationDate = SecurityContext.getTodayDate();
+        double amount = 0;
+        switch (student.getStudentGrade()) {
+            case BACHELOR, ASSOCIATE, BACHELOR_DISCONTINUOUS -> amount =1300000;
+            case MASTER, MASTER_DISCONTINUOUS, PHD_CONTINUOUS, PHD_PROFESSIONAL -> amount=2600000;
+            case SPECIALIZED_DOCTORATE ->  amount = 6500000;
+        }
+        LoanType loanType = LoanType.TUITION;
+        PaymentType paymentType = PaymentType.ONCE_IN_EACH_TERM;
+        return new Loan(amount,student,loanType,paymentType,creationDate);
     }
 
 }

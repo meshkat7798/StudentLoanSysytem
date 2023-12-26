@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Hw16" />
+        <module name="Meshkat_Hashemian_Hw16_maktab101" />
       </profile>
     </annotationProcessing>
   </component>

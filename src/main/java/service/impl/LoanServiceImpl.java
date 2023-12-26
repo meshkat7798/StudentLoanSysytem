@@ -23,7 +23,7 @@ public class LoanServiceImpl extends BaseEntityServiceImpl<Loan, Integer, LoanRe
         if (!loans.isEmpty()) {
             try {
                 for (Loan loan : loans) {
-                    if (findEducationLoan(student).getLoanType().equals(LoanType.EDUCATION)) {
+                    if (loan.getLoanType().equals(LoanType.EDUCATION)) {
                         if (loan.getCreationDate().getYear() == SecurityContext.getTodayDate().getYear())
                             return true;
                     }
@@ -41,7 +41,7 @@ public class LoanServiceImpl extends BaseEntityServiceImpl<Loan, Integer, LoanRe
         if (!loans.isEmpty()) {
             try {
                 for (Loan loan : loans) {
-                    if (findTuitionLoan(student).getLoanType().equals(LoanType.TUITION)) {
+                    if (loan.getLoanType().equals(LoanType.TUITION)) {
                         if (loan.getCreationDate().getYear() == SecurityContext.getTodayDate().getYear())
                             return true;
                     }

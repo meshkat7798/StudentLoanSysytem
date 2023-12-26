@@ -1,7 +1,7 @@
 package menu.installment;
 import entity.Loan;
 import entity.person.Student;
-import menu.loan.LoanMenu;
+import menu.LoanMenu;
 import utility.InputHandling;
 import utility.SecurityContext;
 import java.text.ParseException;

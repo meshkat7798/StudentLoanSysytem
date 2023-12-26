@@ -6,7 +6,6 @@ import entity.enumeration.StudentGrade;
 import entity.enumeration.UnversityType;
 import entity.person.Spouse;
 import entity.person.Student;
-import menu.loan.LoanMenu;
 import utility.InputHandling;
 import utility.SecurityContext;
 import utility.Validation;
@@ -23,16 +22,16 @@ public class Regesteration {
         System.out.println("*** Spouse Information ***");
 
         System.out.println("firstname:");
-        String firstname = InputHandling.stringInput();
+        String firstname = InputHandling.nameInput();
 
         System.out.println("lastname:");
-        String lastname = InputHandling.stringInput();
+        String lastname = InputHandling.nameInput();
 
         System.out.println("fatherName:");
-        String fatherName = InputHandling.stringInput();
+        String fatherName = InputHandling.nameInput();
 
         System.out.println("motherName:");
-        String motherName = InputHandling.stringInput();
+        String motherName = InputHandling.nameInput();
 
         System.out.println("birthCertificateNumber:");
         String birthCertificateNumber = InputHandling.stringInput();
@@ -61,16 +60,16 @@ public class Regesteration {
         System.out.println("Please fill the student form: ");
 
         System.out.println("firstname:");
-        String firstname = InputHandling.stringInput();
+        String firstname = InputHandling.nameInput();
 
         System.out.println("lastname:");
-        String lastname = InputHandling.stringInput();
+        String lastname = InputHandling.nameInput();
 
         System.out.println("fatherName:");
-        String fatherName = InputHandling.stringInput();
+        String fatherName = InputHandling.nameInput();
 
         System.out.println("motherName:");
-        String motherName = InputHandling.stringInput();
+        String motherName = InputHandling.nameInput();
 
         System.out.println("birthCertificateNumber:");
         String birthCertificateNumber = InputHandling.stringInput();
